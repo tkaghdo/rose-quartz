@@ -1,8 +1,13 @@
 {
-  "id": 1,
-  "info": {
-    "name": "tkaghdo",
-    "email": "tkaghdo@gmail.com",
-    "level": 0
-  }
+	"users": [{
+		"id": 1,
+		"name": "tkaghdo",
+        "email": "tkaghdo@gmail.com",
+		"level": 0
+	}, {
+		"id": 2,
+		"name": "aa",
+      "email": "aa@gmail.com",
+		"level": 0
+	}]
 }
