@@ -1,13 +1,1 @@
-{
-	"users": [{
-		"id": 1,
-		"name": "tkaghdo",
-        "email": "tkaghdo@gmail.com",
-		"level": 0
-	}, {
-		"id": 2,
-		"name": "aa",
-      "email": "aa@gmail.com",
-		"level": 0
-	}]
-}
+[{"id": 1, "level": 0, "name": "poop", "email": "aaa@gmail.com"}, {"id": 2, "level": 0, "name": "poop", "email": "mm@gmail.com"}, {"email": "zz@gmail.com", "level": 0, "name": "poop", "id": 3}]

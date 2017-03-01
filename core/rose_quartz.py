@@ -1,16 +1,18 @@
 import sys
 import json
 from user.user import User
-
+import logging
 
 def add_user(user, new_user_id, database="file"):
     user_dict = {"id": new_user_id, "name": user.user_name, "email": user.email, "level": user.level}
     if database == "file":
         try:
-            with open('../data/data.json') as data_file:
+            with open('../data/users.json') as data_file:
                 data = json.load(data_file)
                 data.append(user_dict)
-                print(data)
+
+            with open('../data/users.json', 'w') as data_file:
+                json.dump(data, data_file)
 
 
         except FileNotFoundError as e:
@@ -21,9 +23,9 @@ def add_user(user, new_user_id, database="file"):
 def get_max_user_id(database="file"):
     if database == "file":
         try:
-            with open('../data/data.json') as data_file:
+            with open('../data/users.json') as data_file:
                 data = json.load(data_file)
-                max_id = None
+                max_id = 0
                 for user in data:
                     if user["id"] > max_id:
                         max_id = user["id"]
@@ -47,7 +49,7 @@ def is_user_exists(user, database="file"):
     user_id = None
     if database == "file":
         try:
-            with open('../data/data.json') as data_file:
+            with open('../data/users.json') as data_file:
                 data = json.load(data_file)
                 for user in data:
                     if user["email"] == email:
@@ -63,13 +65,17 @@ def is_user_exists(user, database="file"):
 
 
 def main():
+    logging.basicConfig(filename="../logs/sample.log", level=logging.INFO)
+    log = logging.getLogger(__name__)
+    log.info("Informational message")
+    log.error("An error has happened!")
 
     # SIMULATE CREATING A NEW USER
 
     # rq dict will come from the front end
     user_dict = {
         "name": "poop",
-        "email": "mm@gmail.com",
+        "email": "zz@gmail.com",
     }
 
     # create user object
@@ -80,7 +86,7 @@ def main():
     user_status, user_id = is_user_exists(u2)
 
     if user_status == True:
-        print("User {0} already exists with email {1}".format(u2.get_user_name(), u2.get_email()))
+        print("User {0} already exists".format( u2.get_email()))
         sys.exit(1)
     else:
         # add user to database
@@ -90,6 +96,7 @@ def main():
         else:
             new_user_id = get_max_user_id() + 1
             add_user(u2,new_user_id)
+            print("User {0} added".format(u2.email))
 
 
     # --> if no user exists then create a record of the user
