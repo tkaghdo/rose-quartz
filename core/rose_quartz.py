@@ -65,17 +65,28 @@ def is_user_exists(user, database="file"):
 
 
 def main():
-    logging.basicConfig(filename="../logs/sample.log", level=logging.INFO)
-    log = logging.getLogger(__name__)
-    log.info("Informational message")
-    log.error("An error has happened!")
+
+    # setup logging
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    handler = logging.FileHandler('../log/rose_quartz.log')
+    handler.setLevel(logging.INFO)
+
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+
+    logger.addHandler(handler)
+
+
+
 
     # SIMULATE CREATING A NEW USER
 
     # rq dict will come from the front end
     user_dict = {
         "name": "poop",
-        "email": "zz@gmail.com",
+        "email": "l@gmail.com",
     }
 
     # create user object
@@ -97,9 +108,7 @@ def main():
             new_user_id = get_max_user_id() + 1
             add_user(u2,new_user_id)
             print("User {0} added".format(u2.email))
-
-
-    # --> if no user exists then create a record of the user
+            logger.info("User {0} added".format(u2.email))
 
 
     # TODO: SIMULATE A NEW QUESTION QUEST
