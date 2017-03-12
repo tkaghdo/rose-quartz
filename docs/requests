@@ -1,0 +1,9 @@
+# new signup
+http POST localhost:8000/signup Content-Type:application/json < signup.json
+
+# signup_{timestamp}.json Example
+{
+  "name":     "tamby",
+  "email":    "tamby.kaghdo@gmail.com",
+  "password": "myPassword"
+}
