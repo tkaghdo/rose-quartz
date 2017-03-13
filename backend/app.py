@@ -14,6 +14,6 @@ api.add_route('/signup', sign_up)
 api.add_route('/signup/{name}', sign_up)
 
 # Users
-users = users.User()
-api.add_route('/users', users)
-api.add_route('/users/{name}', users)
+# users = users.User()
+# api.add_route('/users', users)
+# api.add_route('/users/{name}', users)

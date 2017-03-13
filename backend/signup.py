@@ -4,7 +4,9 @@ import uuid
 import json
 import codecs
 from utils.utils import Utilities
+from utils.rq_logging import log
 from model.db_ops import Data_Ops
+
 
 class SignUp(object):
 
@@ -19,6 +21,13 @@ class SignUp(object):
         resp.status = falcon.HTTP_200
 
     def on_post(self, req, resp):
+
+        # TODO log
+        logger = log()
+        logger.info('info message')
+        logger.warn('warn message')
+        #logger.error('error message')
+        #logger.critical('critical message')
 
         # Example of post reqeust: http POST localhost:8000/signup Content-Type:application/json < signup_20170310.json
         # example of the body
@@ -59,6 +68,7 @@ class SignUp(object):
         if body_status:
             insert_obj = Data_Ops()
             insert_obj.insert_user(sign_up_obj)
+            insert_obj.query()
             resp.status = falcon.HTTP_201
         else:
             # TODO generate a log
