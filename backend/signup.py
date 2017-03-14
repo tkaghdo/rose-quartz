@@ -3,15 +3,21 @@ import mimetypes
 import uuid
 import json
 import codecs
+import logging
 from utils.utils import Utilities
-from utils.rq_logging import log
 from model.db_ops import Data_Ops
 
 
 class SignUp(object):
 
     def __init__(self):
-        pass
+        # setup logging
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        self.logger = logging.getLogger(__name__)
+        fh = logging.FileHandler('logs/sign_up.log')
+        fh.setFormatter(formatter)
+        self.logger.addHandler(fh)
+        self.logger.setLevel(logging.INFO)
 
     def insert_user(self, user):
         print(user)
@@ -22,12 +28,8 @@ class SignUp(object):
 
     def on_post(self, req, resp):
 
-        # TODO log
-        logger = log()
-        logger.info('info message')
-        logger.warn('warn message')
-        #logger.error('error message')
-        #logger.critical('critical message')
+        # self.logger.info('info')
+        # self.logger.error('error')
 
         # Example of post reqeust: http POST localhost:8000/signup Content-Type:application/json < signup_20170310.json
         # example of the body
@@ -49,6 +51,7 @@ class SignUp(object):
         if not body:
             raise falcon.HTTPBadRequest('Empty request body',
                                         'A valid JSON document is required.')
+            self.logger.error('Empty request body')
         try:
             sign_up_obj = json.loads(body.decode('utf-8'))
 
@@ -58,6 +61,7 @@ class SignUp(object):
                                    'Could not decode the request body. The '
                                    'JSON was incorrect or not encoded as '
                                    'UTF-8.')
+            self.logger.error('Malformed JSON')
 
         # validate body
         u = Utilities()
