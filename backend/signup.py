@@ -72,8 +72,9 @@ class SignUp(object):
         if body_status:
             insert_obj = Data_Ops()
             insert_obj.insert_user(sign_up_obj)
-            insert_obj.query()
+            # insert_obj.query()
             resp.status = falcon.HTTP_201
         else:
             # TODO generate a log
+            self.logger.error('Faild to insert user: ' + str(sign_up_obj))
             resp.status = falcon.HTTP_417
