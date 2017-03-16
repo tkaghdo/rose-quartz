@@ -43,7 +43,8 @@ class Data_Ops():
 
         # conn.cursor will return a cursor object, you can use this cursor to perform queries
         # server-side cursor, which prevents all of the records from being downloaded at once from the server.
-        cursor = c.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
+        # cursor = c.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
+        cursor = c.cursor()
 
         # execute our Query
         cursor.execute("SELECT * FROM users")
@@ -60,11 +61,20 @@ class Data_Ops():
         print(user)
         # open a connection
         c = self.connect_db()
-
+        print("MAX USER ID: {0}".format(self.get_max_user_id(c)))
         # get max user id
-        user_id = self.get_max_user_id(c)
+        user_id = self.get_max_user_id(c) + 1
+        email = user['email']
+        name = user['name']
+        password = user['password']
+        level = 0
         insert_statement = 'INSERT INTO USERS (ID, EMAIL, NAME, PASSWORD, LEVEL) ' \
-                   'VALUES ({0}, {1}, {2}, {3}, {4})'.format(user_id, "p", "o", "l", 0)
+                   'VALUES ({0}, {1}, {2}, {3}, {4})'.format(user_id,
+                                                             '\'' + email + '\'',
+                                                             '\'' + name + '\'',
+                                                             '\'' + password + '\'',
+                                                             level)
+        print(insert_statement)
         # get a cursor
         cursor = c.cursor()
         try:
@@ -72,12 +82,17 @@ class Data_Ops():
             cursor.execute(insert_statement)
         except psycopg2.ProgrammingError as e:
             self.logger.error("INSERT FAILED. STATEMENT: " + insert_statement + '\nError: ' + str(e))
-
-        # close the connection
-        self.close_db_connect()
+        finally:
+            # commit db changes
+            c.commit()
+            # close cursor
+            cursor.close()
+            # close the connection
+            self.close_db_connect()
 
     def get_max_user_id(self, connection):
-        cursor = connection.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
+        # cursor = connection.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
+        cursor = connection.cursor()
 
         # execute our Query
         cursor.execute('SELECT MAX(ID) FROM users')
@@ -91,3 +106,5 @@ class Data_Ops():
             max_row = row_count
 
         return max_row
+
+    def does_user_exists(self, connection):

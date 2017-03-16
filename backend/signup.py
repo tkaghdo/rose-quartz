@@ -19,8 +19,6 @@ class SignUp(object):
         self.logger.addHandler(fh)
         self.logger.setLevel(logging.INFO)
 
-    def insert_user(self, user):
-        print(user)
 
     def on_get(self, req, resp, name):
         resp.body = '{"s":' + '\'' + name +'\'}'
@@ -68,13 +66,13 @@ class SignUp(object):
         body_status, name_status, email_status, password_status = \
          u.validate_body(sign_up_obj, "SIGN_UP")
 
-        # TODO insert user to database
         if body_status:
+            # TODO Check if an email already exists or not. Throw back an http error and log if it exists
+            # TODO also log if u were able to insert the user
             insert_obj = Data_Ops()
             insert_obj.insert_user(sign_up_obj)
             # insert_obj.query()
             resp.status = falcon.HTTP_201
         else:
-            # TODO generate a log
             self.logger.error('Faild to insert user: ' + str(sign_up_obj))
             resp.status = falcon.HTTP_417

@@ -1,7 +1,2 @@
-2017-03-14 20:20:53,199 - model.db_ops - ERROR - INSERT FAILED. STATEMENT: INSERT INTO USERS (ID, EMAIL, NAME, PASSWORD, LEVEL) VALUES (0, p, o, l, 0)
-Error: 
-2017-03-14 20:22:16,582 - model.db_ops - ERROR - INSERT FAILED. STATEMENT: INSERT INTO USERS (ID, EMAIL, NAME, PASSWORD, LEVEL) VALUES (0, p, o, l, 0)
-Error: column "p" does not exist
-LINE 1: ...ERS (ID, EMAIL, NAME, PASSWORD, LEVEL) VALUES (0, p, o, l, 0...
-                                                             ^
 
+                                                             ^
