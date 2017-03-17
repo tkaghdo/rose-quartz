@@ -61,7 +61,10 @@ class Data_Ops():
         print(user)
         # open a connection
         c = self.connect_db()
-        print("MAX USER ID: {0}".format(self.get_max_user_id(c)))
+
+        # Check if the user exists
+        self.does_user_exists(c, user['email'])
+
         # get max user id
         user_id = self.get_max_user_id(c) + 1
         email = user['email']
@@ -91,20 +94,39 @@ class Data_Ops():
             self.close_db_connect()
 
     def get_max_user_id(self, connection):
-        # cursor = connection.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
-        cursor = connection.cursor()
 
-        # execute our Query
-        cursor.execute('SELECT MAX(ID) FROM users')
-
-        # returns row count, -1 if empty
-        row_count = cursor.rowcount
         max_row = None
-        if row_count < 0:
-            max_row = 0
-        else:
-            max_row = row_count
+        try:
+            # cursor = connection.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
+            cursor = connection.cursor()
+
+            # execute our Query
+            cursor.execute('SELECT MAX(ID) FROM users')
+            for record in cursor:
+                max_row = record[0]
+
+            if max_row == None:
+                max_row = 0
+
+
+        except psycopg2.ProgrammingError as e:
+            self.logger.error(str(e))
+        finally:
+            cursor.close()
 
         return max_row
 
-    def does_user_exists(self, connection):
+    def does_user_exists(self, connection, email):
+        try:
+            # cursor = connection.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
+            cursor = connection.cursor()
+            # execute our Query
+            cursor.execute('SELECT COUNT(*) FROM users where email = {0}'.format('\'' + email + '\''))
+            print("*****")
+            for record in cursor:
+                print(record[0])
+            print("*****")
+        except psycopg2.ProgrammingError as e:
+            self.logger.error(str(e))
+        finally:
+            cursor.close()
