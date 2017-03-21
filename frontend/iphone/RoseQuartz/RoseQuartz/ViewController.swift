@@ -28,6 +28,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    //MARK: Actions
+    
+    @IBAction func signup(_ sender: UIButton) {
+        print("SIGN-UP PRESSED")
+    }
 }
 
