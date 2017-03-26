@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5923E3AA1E8816340012BADC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923E3A91E8816340012BADC /* Default-568h@2x.png */; };
 		594179131E7F37CB00A075B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594179121E7F37CB00A075B8 /* AppDelegate.swift */; };
 		594179151E7F37CB00A075B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594179141E7F37CB00A075B8 /* ViewController.swift */; };
 		594179181E7F37CB00A075B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 594179161E7F37CB00A075B8 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5923E3A91E8816340012BADC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5941790F1E7F37CB00A075B8 /* RoseQuartz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoseQuartz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		594179121E7F37CB00A075B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		594179141E7F37CB00A075B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		594179061E7F37CB00A075B8 = {
 			isa = PBXGroup;
 			children = (
+				5923E3A91E8816340012BADC /* Default-568h@2x.png */,
 				594179111E7F37CB00A075B8 /* RoseQuartz */,
 				594179261E7F37CB00A075B8 /* RoseQuartzTests */,
 				594179101E7F37CB00A075B8 /* Products */,
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5941791D1E7F37CB00A075B8 /* LaunchScreen.storyboard in Resources */,
+				5923E3AA1E8816340012BADC /* Default-568h@2x.png in Resources */,
 				5941791A1E7F37CB00A075B8 /* Assets.xcassets in Resources */,
 				594179181E7F37CB00A075B8 /* Main.storyboard in Resources */,
 			);
@@ -404,6 +408,7 @@
 				5941792E1E7F37CB00A075B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5941792F1E7F37CB00A075B8 /* Build configuration list for PBXNativeTarget "RoseQuartzTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +417,7 @@
 				594179311E7F37CB00A075B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

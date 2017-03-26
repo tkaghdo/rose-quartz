@@ -28,7 +28,51 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK: helper methods
+    
+    func exec_post_request(){
+        let dict = ["email": "test@gmail.com", "password":"123456", "name": "yy"] as [String: Any]
+        if let jsonData = try? JSONSerialization.data(withJSONObject: dict, options: []) {
+            
+            
+            let url = NSURL(string: "http://localhost:8000/signup")!
+            let request = NSMutableURLRequest(url: url as URL)
+            request.httpMethod = "POST"
+            
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest){ data,response,error in
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                    
+                    if let parseJSON = json {
+                        let resultValue:String = parseJSON["success"] as! String;
+                        print("result: \(resultValue)")
+                        print(parseJSON)
+                    }
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func get_current_date() -> String {
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        
+        var str_curr_date: String
+        str_curr_date = formatter.string(from: currentDate)
+        
+        return str_curr_date
+    }
+    
     //MARK: Actions
+    
     
     @IBAction func signup(_ sender: UIButton) {
         
@@ -41,22 +85,17 @@ class ViewController: UIViewController {
         // create the user json
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userDict, options: .prettyPrinted)
-            // here "jsonData" is the dictionary encoded in JSON data
-            
             
             // write the the json to file
-            let file = "qqqq.txt" //this is the file. we will write to and read from it
-            
-            print(jsonData)
-            let text = jsonData //just a tex
+            let file = "signup_" + get_current_date() + ".json"
             
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 //writing
                 do {
-                    print(dir)
                     let path = dir.appendingPathComponent(file)
-                    try text.write(to: path)
-                    print("***")
+                    try jsonData.write(to: path)
+                    // send the json to backend
+                    // exec_post_request()
                 }
                 catch {print(error)}
                 defer{} //TODO: delete json file
@@ -68,20 +107,10 @@ class ViewController: UIViewController {
         }
         
         
-        /*
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            //writing
-            do {
-                print(dir)
-                let path = dir.appendingPathComponent(file)
-                try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-                print("***")
-            }
-            catch {print(error)}
-            //TODO: delete json file
-            defer{}
-        }
-        */
+        
+        
+        
+
     }
 }
 

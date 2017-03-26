@@ -6,3 +6,5 @@
 LINE 1: SELECT COUNT(*) FROM users where email = tamby.kaghdo@gmail....
                                                  ^
 
+2017-03-26 11:33:37,149 - signup - ERROR - Faild to insert user: {'name': 'yy', 'password': '123456', 'email': 'test@gmail.com'}
+2017-03-26 11:36:00,777 - signup - ERROR - Faild to insert user: {'name': 'yy', 'password': '123456', 'email': 'test@gmail.com'}
