@@ -21,7 +21,7 @@ class SignUp(object):
 
 
     def on_get(self, req, resp, name):
-        resp.body = '{"s":' + '\'' + name +'\'}'
+        resp.body = '{"name": "tamby"}'
         resp.status = falcon.HTTP_200
 
     def on_post(self, req, resp):
