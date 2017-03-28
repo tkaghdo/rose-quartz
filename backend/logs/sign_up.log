@@ -8,3 +8,27 @@ LINE 1: SELECT COUNT(*) FROM users where email = tamby.kaghdo@gmail....
 
 2017-03-26 11:33:37,149 - signup - ERROR - Faild to insert user: {'name': 'yy', 'password': '123456', 'email': 'test@gmail.com'}
 2017-03-26 11:36:00,777 - signup - ERROR - Faild to insert user: {'name': 'yy', 'password': '123456', 'email': 'test@gmail.com'}
+2017-03-26 18:20:27,032 - signup - ERROR - Faild to insert user: {'name': 'e', 'password': 'e', 'email': 'e'}
+2017-03-26 18:27:44,435 - signup - ERROR - Faild to insert user: {'name': 's', 'password': 's', 'email': 'as'}
+2017-03-26 18:33:47,884 - signup - ERROR - Faild to insert user: {'name': 'o', 'password': 'o', 'email': 'o'}
+2017-03-26 19:06:57,473 - signup - ERROR - Faild to insert user: {'name': 'q', 'password': 'q', 'email': 'q'}
+2017-03-26 19:08:18,549 - signup - ERROR - Faild to insert user: {'name': 'w', 'password': 'w', 'email': 'w'}
+2017-03-26 19:17:46,599 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:08,306 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:48,037 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:49,496 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:49,708 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:49,912 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:50,137 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:50,357 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:50,559 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:50,758 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:18:50,982 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:20:14,454 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:21:24,579 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:23:33,125 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:24:33,541 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:24:55,498 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'password': 'p', 'email': 'email'}
+2017-03-26 19:25:41,561 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'email': 'email', 'password': 'p'}
+2017-03-26 19:25:45,599 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'email': 'email', 'password': 'p'}
+2017-03-26 19:35:12,946 - signup - ERROR - Faild to insert user: {'name': 'name', 'email': 'test@gmail.com', 'password': '123456'}

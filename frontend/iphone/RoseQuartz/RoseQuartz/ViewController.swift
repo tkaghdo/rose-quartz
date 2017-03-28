@@ -31,45 +31,56 @@ class ViewController: UIViewController {
     
     // MARK: helper methods
     
-    func exec_post_request(){
-        let dict = ["email": "test@gmail.com", "password":"123456", "name": "yy"] as [String: Any]
-        if let jsonData = try? JSONSerialization.data(withJSONObject: dict, options: []) {
+    func OLD_exec_post_request(user_data: Data){
+        
+        let url = NSURL(string: "http://localhost:8000/signup")!
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "POST"
+        
+        request.httpBody = user_data
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest){ data,response,error in
             
-            
-            let url = NSURL(string: "http://localhost:8000/signup")!
-            let request = NSMutableURLRequest(url: url as URL)
-            request.httpMethod = "POST"
-            
-            request.httpBody = jsonData
-            
-            let task = URLSession.shared.dataTask(with: request as URLRequest){ data,response,error in
-                
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                    
-                    if let parseJSON = json {
-                        let resultValue:String = parseJSON["success"] as! String;
-                        print("result: \(resultValue)")
-                        print(parseJSON)
-                    }
-                } catch let error as NSError {
-                    print(error)
+            do {
+                print(111)
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                print(json)
+                if let parseJSON = json {
+                    print(222)
+                    let resultValue:String = parseJSON["success"] as! String;
+                    print("result: \(resultValue)")
+                    print(parseJSON)
                 }
+            } catch let error as NSError {
+                print("in here")
+                print(error)
             }
-            task.resume()
         }
+        task.resume()
+        
     }
     
-    func get_current_date() -> String {
-        let currentDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
+    func get_request(){
+        let url = URL(string: "http://localhost:8000/signup/tamby")
         
-        var str_curr_date: String
-        str_curr_date = formatter.string(from: currentDate)
+        let task = URLSession.shared.dataTask(with: url!) { data, response, error in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            guard let data = data else {
+                print("Data is empty")
+                return
+            }
+            
+            let json = try! JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+        }
         
-        return str_curr_date
+        task.resume()
     }
+    
+    
     
     //MARK: Actions
     
@@ -77,40 +88,16 @@ class ViewController: UIViewController {
     @IBAction func signup(_ sender: UIButton) {
         
         //TODO: encode the values
-        let userDict: [String:String] = [
+        let user_dict: [String:String] = [
             "name" : nameTextField.text!,
             "email" : emailTextField.text!,
             "password" : pwTextField.text!
         ]
-        // create the user json
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: userDict, options: .prettyPrinted)
-            
-            // write the the json to file
-            let file = "signup_" + get_current_date() + ".json"
-            
-            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                //writing
-                do {
-                    let path = dir.appendingPathComponent(file)
-                    try jsonData.write(to: path)
-                    // send the json to backend
-                    // exec_post_request()
-                }
-                catch {print(error)}
-                defer{} //TODO: delete json file
-            }
-            
-        }
-        catch {
-            print(error)
-        }
         
+        // test get request
+        // get_request()
         
-        
-        
-        
-
+        // TODO: post user_dict to backend
     }
 }
 
