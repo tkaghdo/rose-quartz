@@ -32,3 +32,11 @@ LINE 1: SELECT COUNT(*) FROM users where email = tamby.kaghdo@gmail....
 2017-03-26 19:25:41,561 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'email': 'email', 'password': 'p'}
 2017-03-26 19:25:45,599 - signup - ERROR - Faild to insert user: {'name': 'ABC', 'email': 'email', 'password': 'p'}
 2017-03-26 19:35:12,946 - signup - ERROR - Faild to insert user: {'name': 'name', 'email': 'test@gmail.com', 'password': '123456'}
+2017-03-29 13:39:44,959 - signup - ERROR - Faild to insert user: {'password': 'r', 'name': 'r', 'email': 'r'}
+2017-03-29 13:41:22,554 - signup - ERROR - Faild to insert user: {'password': 'g', 'name': 'g', 'email': 'g'}
+2017-03-29 13:43:09,048 - signup - ERROR - Faild to insert user: {'password': 's', 'name': 's', 'email': 's'}
+2017-03-29 13:43:46,750 - signup - ERROR - Faild to insert user: {'email': 's', 'password': 's', 'name': 's'}
+2017-03-29 13:46:04,046 - signup - ERROR - Faild to insert user: {'email': 'did', 'password': 'dd', 'name': 'did'}
+2017-03-29 13:48:57,360 - signup - ERROR - Faild to insert user: {'email': 'did', 'name': 'did', 'password': 'dd'}
+2017-03-29 13:52:52,445 - signup - ERROR - Faild to insert user: {'email': 'didss', 'name': 'did', 'password': 'dd'}
+2017-03-29 13:58:14,942 - signup - ERROR - Faild to insert user: {'password': 'dd', 'name': 'did', 'email': 'didssss'}

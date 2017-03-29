@@ -43,13 +43,6 @@ class SignUp(object):
             "password": "myPassword"
           }
           '''
-
-          # Content-Type
-          ext = mimetypes.guess_extension(req.content_type)
-
-          #json file
-          filename = '{uuid}{ext}'.format(uuid=uuid.uuid4(), ext=ext)
-
           body = req.stream.read()
           if not body:
               raise falcon.HTTPBadRequest('Empty request body',
@@ -77,7 +70,7 @@ class SignUp(object):
               insert_obj = Data_Ops()
               insert_obj.insert_user(sign_up_obj)
               # insert_obj.query()
-              resp.body = '{"name": "tst"}'
+              resp.body = 'user signed up'
               resp.status = falcon.HTTP_201
           else:
               self.logger.error('Faild to insert user: ' + str(sign_up_obj))

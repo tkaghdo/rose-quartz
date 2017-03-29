@@ -31,35 +31,6 @@ class ViewController: UIViewController {
     
     // MARK: helper methods
     
-    func OLD_exec_post_request(user_data: Data){
-        
-        let url = NSURL(string: "http://localhost:8000/signup")!
-        let request = NSMutableURLRequest(url: url as URL)
-        request.httpMethod = "POST"
-        
-        request.httpBody = user_data
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest){ data,response,error in
-            
-            do {
-                print(111)
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                print(json)
-                if let parseJSON = json {
-                    print(222)
-                    let resultValue:String = parseJSON["success"] as! String;
-                    print("result: \(resultValue)")
-                    print(parseJSON)
-                }
-            } catch let error as NSError {
-                print("in here")
-                print(error)
-            }
-        }
-        task.resume()
-        
-    }
-    
     func get_request(){
         let url = URL(string: "http://localhost:8000/signup/tamby")
         
@@ -90,15 +61,21 @@ class ViewController: UIViewController {
         
         request.httpBody = jsonData
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            guard let data = data, error == nil else { // check for fundamental networking error
                 print("error=\(error)")
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 201 {           // check for http errors
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 201 { // user unable to signup
                 print("statusCode should be 201, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
+            else if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode == 201 { // user signup success
+                print("*signup success*")
+                print("response = \(response)")
+                // forward user to select language
+            }
+            
             
             let responseString = String(data: data, encoding: .utf8)
             print("responseString = \(responseString)")
