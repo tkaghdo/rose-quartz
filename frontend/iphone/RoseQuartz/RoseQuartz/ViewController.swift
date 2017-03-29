@@ -81,19 +81,22 @@ class ViewController: UIViewController {
     }
     
     // post
-    func add_user(){
-        var request = URLRequest(url: URL(string: "http://localhost:8000/signup/tamby")!)
+    func add_user(user: [String:String]){
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: user, options: [])
+        
+        var request = URLRequest(url: URL(string: "http://localhost:8000/signup")!)
         request.httpMethod = "POST"
-        let postString = "id=13&name=Jack"
-        request.httpBody = postString.data(using: .utf8)
+        
+        request.httpBody = jsonData
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(error)")
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 201 {           // check for http errors
+                print("statusCode should be 201, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
             
@@ -121,7 +124,7 @@ class ViewController: UIViewController {
         
         // TODO: post user_dict to backend
         
-        add_user()
+        add_user(user: user_dict)
     }
 }
 
