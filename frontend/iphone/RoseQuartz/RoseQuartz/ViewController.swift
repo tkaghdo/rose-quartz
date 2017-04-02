@@ -99,8 +99,7 @@ class ViewController: UIViewController {
         // test get request
         // get_request()
         
-        // TODO: post user_dict to backend
-        
+        // post user_dict to backend
         add_user(user: user_dict)
     }
 }
