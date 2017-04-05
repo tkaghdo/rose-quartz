@@ -40,3 +40,7 @@ LINE 1: SELECT COUNT(*) FROM users where email = tamby.kaghdo@gmail....
 2017-03-29 13:48:57,360 - signup - ERROR - Faild to insert user: {'email': 'did', 'name': 'did', 'password': 'dd'}
 2017-03-29 13:52:52,445 - signup - ERROR - Faild to insert user: {'email': 'didss', 'name': 'did', 'password': 'dd'}
 2017-03-29 13:58:14,942 - signup - ERROR - Faild to insert user: {'password': 'dd', 'name': 'did', 'email': 'didssss'}
+2017-04-01 23:22:45,886 - model.db_ops - ERROR - column "email" does not exist
+LINE 1: SELECT COUNT(*) FROM USER WHERE EMAIL = 'a'
+                                        ^
+

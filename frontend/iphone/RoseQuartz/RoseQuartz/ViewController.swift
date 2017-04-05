@@ -87,6 +87,12 @@ class ViewController: UIViewController {
     //MARK: Actions
     
     
+    @IBAction func login(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "SignupToLoginSegue", sender: self)
+    }
+    
+    
     @IBAction func signup(_ sender: UIButton) {
         
         //TODO: encode the values
@@ -99,8 +105,7 @@ class ViewController: UIViewController {
         // test get request
         // get_request()
         
-        // TODO: post user_dict to backend
-        
+        // post user_dict to backend
         add_user(user: user_dict)
     }
 }

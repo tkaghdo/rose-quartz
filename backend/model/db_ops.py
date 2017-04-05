@@ -2,6 +2,7 @@ import psycopg2
 import psycopg2.extras
 import pprint
 import logging
+import time
 
 class RoseQuartzException(Exception):
     pass
@@ -70,13 +71,18 @@ class Data_Ops():
         email = user['email']
         name = user['name']
         password = user['password']
-        level = 0
-        insert_statement = 'INSERT INTO USERS (ID, EMAIL, NAME, PASSWORD, LEVEL) ' \
-                   'VALUES ({0}, {1}, {2}, {3}, {4})'.format(user_id,
+        # TAMBY: YOU ARE HERE. need to refactor this insert
+        date_user_created = time.strftime("%Y-%m-%d") # yyyy-mm-dd
+        date_user_updated = date_user_created
+        date_last_login = date_user_created
+        insert_statement = 'INSERT INTO USERS (USER_ID, EMAIL, NAME, PASSWORD, DATE_CREATED, DATE_UPDATED, LAST_LOGIN) ' \
+                   'VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6})'.format(user_id,
                                                              '\'' + email + '\'',
                                                              '\'' + name + '\'',
                                                              '\'' + password + '\'',
-                                                             level)
+                                                             '\'' + date_user_created + '\'',
+                                                             '\'' + date_user_updated + '\'',
+                                                             '\'' + date_last_login + '\'')
         print(insert_statement)
         # get a cursor
         cursor = c.cursor()
@@ -101,7 +107,7 @@ class Data_Ops():
             cursor = connection.cursor()
 
             # execute our Query
-            cursor.execute('SELECT MAX(ID) FROM users')
+            cursor.execute('SELECT MAX(USER_ID) FROM USERS')
             for record in cursor:
                 max_row = record[0]
 
@@ -117,16 +123,20 @@ class Data_Ops():
         return max_row
 
     def does_user_exists(self, connection, email):
+        exists = False
         try:
             # cursor = connection.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
             cursor = connection.cursor()
             # execute our Query
-            cursor.execute('SELECT COUNT(*) FROM users where email = {0}'.format('\'' + email + '\''))
-            print("*****")
+            cursor.execute('SELECT COUNT(*) FROM USERS WHERE EMAIL = {0}'.format('\'' + email + '\''))
+            user_count = 0
             for record in cursor:
-                print(record[0])
-            print("*****")
+                user_count += 1
+            if user_count != 0:
+                exists = True
         except psycopg2.ProgrammingError as e:
             self.logger.error(str(e))
         finally:
             cursor.close()
+
+        return exists
