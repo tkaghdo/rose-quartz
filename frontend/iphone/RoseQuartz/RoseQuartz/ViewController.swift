@@ -87,6 +87,12 @@ class ViewController: UIViewController {
     //MARK: Actions
     
     
+    @IBAction func login(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "SignupToLoginSegue", sender: self)
+    }
+    
+    
     @IBAction func signup(_ sender: UIButton) {
         
         //TODO: encode the values
