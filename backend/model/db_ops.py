@@ -140,3 +140,9 @@ class Data_Ops():
             cursor.close()
 
         return exists
+
+    def login_user(self, user):
+        login_status = False
+        print("USER: ", user)
+
+        return login_status

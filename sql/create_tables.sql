@@ -1,4 +1,4 @@
-create table users (
+  create table users (
   user_id int primary key not null,
   email varchar(50) not null UNIQUE,
   name varchar(50) not null,
