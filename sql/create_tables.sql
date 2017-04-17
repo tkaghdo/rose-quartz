@@ -1,3 +1,11 @@
+create table events(
+  event_id int primary key not null,
+  event_timestamp timestamp,
+  user_id int not null,
+  language_id int,
+  question_id int
+);
+
   create table users (
   user_id int primary key not null,
   email varchar(50) not null UNIQUE,
@@ -9,6 +17,11 @@
   quests json,
   rolling_points json
 );
+
+select event_id, max(event_timestamp)
+from events
+join users on events.user_id = users.user_id and users.email = {0}
+group by 1;
 
 create table dim_language(
   language_id int primary key not null,

@@ -59,6 +59,7 @@ class Data_Ops():
 
 
     def insert_user(self, user):
+        insert_user_status = False
         print(user)
         # open a connection
         c = self.connect_db()
@@ -87,9 +88,11 @@ class Data_Ops():
         # get a cursor
         cursor = c.cursor()
         try:
-            # run the insert statement
+            # rcreate user record
             cursor.execute(insert_statement)
+            insert_user_status = True
         except psycopg2.ProgrammingError as e:
+            insert_user_status = False
             self.logger.error("INSERT FAILED. STATEMENT: " + insert_statement + '\nError: ' + str(e))
         finally:
             # commit db changes
@@ -98,6 +101,8 @@ class Data_Ops():
             cursor.close()
             # close the connection
             self.close_db_connect()
+
+        return insert_user_status
 
     def get_max_user_id(self, connection):
 
@@ -141,8 +146,52 @@ class Data_Ops():
 
         return exists
 
-    def login_user(self, user):
-        login_status = False
-        print("USER: ", user)
+    def user_last_event(self, connection, user_email):
+        # return none if no records. else return event id
+        last_event_obj = None
+        try:
+            cursor = connection.cursor()
+            # get the event id of last event for this user
+            cursor.execute('SELECT EVENT_ID, MAX(EVENT_TIMESTAMP) '
+                   'FROM EVENTS '
+                   'JOIN USERS ON EVENTS.USER_ID = USERS.USER_ID '
+                   'AND USERS.EMAIL = {0}  GROUP BY 1'.format('\'' + user_email + '\''))
 
-        return login_status
+            count = 0
+            for record in cursor:
+                last_event_obj = record[0]
+                count += 1
+
+        except psycopg2.ProgrammingError as e:
+            self.logger.error(str(e))
+        finally:
+            cursor.close()
+
+        return last_event_obj
+
+    def login_user(self, user):
+        login_status = None
+        next_screen = None
+        print('Email: ', user['email'])
+        print('Pasword: ', user['password'])
+
+        c = self.connect_db()
+        user_exists = self.does_user_exists(c, user['password'])
+        if user_exists:
+            # last_event is a dict with last event in the events table.
+            # if no events then rediect to the 'select language screen'
+            last_event = self.user_last_event(c, user['email'])
+            if last_event == None:
+                # go to language_selection()
+                print("NO LAST EVENT. GO TO language_selection")
+                login_status = True
+                next_screen = 'GO_TO_LANGUAGE_SELECTION'
+            else:
+                # go to next question
+                print("FOUND LAST EVENT. GOING TO NEXT QUESTIONs")
+                login_status = True
+                next_screen = 'GO_TO_NEXT_QUESTION'
+        else:
+            login_status = False
+
+        return login_status, next_screen

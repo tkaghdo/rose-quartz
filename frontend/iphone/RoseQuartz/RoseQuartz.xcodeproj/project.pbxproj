@@ -15,6 +15,7 @@
 		5941791A1E7F37CB00A075B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 594179191E7F37CB00A075B8 /* Assets.xcassets */; };
 		5941791D1E7F37CB00A075B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5941791B1E7F37CB00A075B8 /* LaunchScreen.storyboard */; };
 		594179281E7F37CB00A075B8 /* RoseQuartzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594179271E7F37CB00A075B8 /* RoseQuartzTests.swift */; };
+		5964E0B51EA4136F008474A8 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5964E0B41EA4136F008474A8 /* LanguageSelectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		594179231E7F37CB00A075B8 /* RoseQuartzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoseQuartzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		594179271E7F37CB00A075B8 /* RoseQuartzTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoseQuartzTests.swift; sourceTree = "<group>"; };
 		594179291E7F37CB00A075B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5964E0B41EA4136F008474A8 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				594179191E7F37CB00A075B8 /* Assets.xcassets */,
 				5941791B1E7F37CB00A075B8 /* LaunchScreen.storyboard */,
 				5941791E1E7F37CB00A075B8 /* Info.plist */,
+				5964E0B41EA4136F008474A8 /* LanguageSelectionViewController.swift */,
 			);
 			path = RoseQuartz;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5923E3AC1E9482BD0012BADC /* LoginViewController.swift in Sources */,
+				5964E0B51EA4136F008474A8 /* LanguageSelectionViewController.swift in Sources */,
 				594179151E7F37CB00A075B8 /* ViewController.swift in Sources */,
 				594179131E7F37CB00A075B8 /* AppDelegate.swift in Sources */,
 			);

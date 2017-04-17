@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: UIButton) {
         
         //TODO: encode the values
+        
         let user_dict: [String:String] = [
             "email" : email.text!,
             "password" : password.text!
@@ -39,9 +40,31 @@ class LoginViewController: UIViewController {
         
         // post user_dict to backend
         login_user(user: user_dict)
+ 
     }
     
     // MARK: helper methods
+    
+    func convertToDictionary(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
+    
+    func navigate_to_next_screen(next_screen: String) {
+        // go to langauge selection view
+        if (next_screen == "GO_TO_LANGUAGE_SELECTION"){
+            performSegue(withIdentifier: "LanguageSelectionSegue", sender: self)
+        }
+        else{
+            print("other screen")
+        }
+    }
     
     func login_user(user: [String:String]){
         
@@ -63,13 +86,20 @@ class LoginViewController: UIViewController {
             }
             else if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode == 201 { // user login success
                 print("*login success*")
-                print("response = \(response)")
+                print("login response = \(response)")
+                
+                let responseString = String(data: data, encoding: .utf8)
+                print("responseString= \(responseString)")
+                
                 // forward user to select language
+                // which screen should you go to
+                //GO_TO_LANGUAGE_SELECTION or GO_TO_NEXT_QUESTION?
+                
+                let dict = self.convertToDictionary(text: responseString!)
+                
+                self.navigate_to_next_screen(next_screen: dict!["next_screen"] as! String)
+                
             }
-            
-            
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
         }
         task.resume()
     }

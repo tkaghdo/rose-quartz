@@ -1,5 +1,12 @@
+import falcon
+import mimetypes
+import uuid
+import json
+import codecs
 import logging
+from utils.utils import Utilities
 from model.db_ops import Data_Ops
+
 
 class Login(object):
 
@@ -34,10 +41,12 @@ class Login(object):
         print("LOGIN OBJECT: ", login_obj)
 
         l_user = Data_Ops()
-        status = l_user.login_user(login_obj)
+        status, next_screen = l_user.login_user(login_obj)
         if status:
             # login succes
-            resp.body = 'user logged in'
+            print(next_screen)
+            resp.body = json.dumps({'next_screen': next_screen})
+
             resp.status = falcon.HTTP_201
         else:
             # login Fail

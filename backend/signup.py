@@ -65,13 +65,14 @@ class SignUp(object):
            u.validate_body(sign_up_obj, "SIGN_UP")
 
           if body_status:
-              # TODO Check if an email already exists or not. Throw back an http error and log if it exists
-              # TODO also log if u were able to insert the user
               insert_obj = Data_Ops()
-              insert_obj.insert_user(sign_up_obj)
-              # insert_obj.query()
-              resp.body = 'user signed up'
-              resp.status = falcon.HTTP_201
+              insert_status = insert_obj.insert_user(sign_up_obj)
+              if insert_status:
+                  resp.body = 'user signed up'
+                  resp.status = falcon.HTTP_201
+              else:
+                  self.logger.error('Failed to create user record ' + str(sign_up_obj))
+                  resp.status = falcon.HTTP_417
           else:
-              self.logger.error('Faild to insert user: ' + str(sign_up_obj))
+              self.logger.error('Failed to validate json object ' + str(sign_up_obj))
               resp.status = falcon.HTTP_417
