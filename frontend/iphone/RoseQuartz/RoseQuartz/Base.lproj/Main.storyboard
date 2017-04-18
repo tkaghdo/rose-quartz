@@ -188,7 +188,6 @@
                                 <state key="normal" title="LOGIN"/>
                                 <connections>
                                     <action selector="login:" destination="RX9-hm-tG7" eventType="touchUpInside" id="ElV-6p-9In"/>
-                                    <segue destination="2sv-xK-VGv" kind="show" identifier="LanguageSelectionSegue" id="1qj-ot-UVN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -197,6 +196,7 @@
                     <connections>
                         <outlet property="email" destination="BK3-8y-Gvn" id="iWi-jn-EGv"/>
                         <outlet property="password" destination="QkV-WG-Z8b" id="1TY-IH-aR6"/>
+                        <segue destination="2sv-xK-VGv" kind="show" identifier="LanguageSelectionSegue" id="8eC-vZ-ush"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RsO-jE-zry" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -222,13 +222,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TSTST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXu-c1-Szw">
+                                <rect key="frame" x="154" y="407" width="132" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kT3-ql-FI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="136"/>
+            <point key="canvasLocation" x="1357.5999999999999" y="135.38230884557723"/>
         </scene>
     </scenes>
 </document>

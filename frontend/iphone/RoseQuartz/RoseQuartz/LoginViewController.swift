@@ -58,12 +58,15 @@ class LoginViewController: UIViewController {
     
     func navigate_to_next_screen(next_screen: String) {
         // go to langauge selection view
+        //performSegue(withIdentifier: "LanguageSelectionSegue", sender: self)
+        print("** NEXT SCREEN IS **: " + next_screen)
         if (next_screen == "GO_TO_LANGUAGE_SELECTION"){
             performSegue(withIdentifier: "LanguageSelectionSegue", sender: self)
         }
         else{
             print("other screen")
         }
+        
     }
     
     func login_user(user: [String:String]){
