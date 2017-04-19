@@ -61,7 +61,7 @@ class LoginViewController: UIViewController {
         //performSegue(withIdentifier: "LanguageSelectionSegue", sender: self)
         print("** NEXT SCREEN IS **: " + next_screen)
         if (next_screen == "GO_TO_LANGUAGE_SELECTION"){
-            performSegue(withIdentifier: "LanguageSelectionSegue", sender: self)
+            //performSegue(withIdentifier: "LanguageSelectionSegue", sender: self)
         }
         else{
             print("other screen")

@@ -1,19 +1,22 @@
 //
-//  LanguageSelectionViewController.swift
+//  QuestionsViewController.swift
 //  RoseQuartz
 //
-//  Created by Tamby Kaghdo on 4/16/17.
+//  Created by Tamby Kaghdo on 4/18/17.
 //  Copyright © 2017 Tamby Kaghdo. All rights reserved.
 //
 
 import UIKit
 
-class LanguageSelectionViewController: UIViewController {
+class QuestionsViewController: UIViewController {
 
+    @IBOutlet weak var questionLabel: UILabel!
+    var passedData: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        questionLabel.text = passedData
+        
     }
 
     override func didReceiveMemoryWarning() {
