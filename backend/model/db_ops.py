@@ -146,6 +146,24 @@ class Data_Ops():
 
         return exists
 
+    def get_languages(self):
+        try:
+            connection = self.connect_db()
+            cursor = connection.cursor()
+            # get the event id of last event for this user
+            cursor.execute('SELECT language from language order by 1')
+
+            language_list = []
+            for record in cursor:
+                language_list.append(record[0])
+
+        except psycopg2.ProgrammingError as e:
+            self.logger.error(str(e))
+        finally:
+            cursor.close()
+
+        return language_list
+
     def user_last_event(self, connection, user_email):
         # return none if no records. else return event id
         last_event_obj = None

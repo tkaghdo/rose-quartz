@@ -23,10 +23,11 @@ from events
 join users on events.user_id = users.user_id and users.email = {0}
 group by 1;
 
-create table dim_language(
+create table language(
   language_id int primary key not null,
-  language varchar(50) not null
+  language varchar(500) not null
 );
+
 
 create table dim_question(
   question_id int primary key not null,
